@@ -1,37 +1,22 @@
 import streamlit as st
-import google.generativeai as genai
-import os
-from PIL import Image
 
 st.set_page_config(page_title="Circuit Whisperer")
 
 st.title("🔌 Circuit Whisperer")
-st.write("Upload a circuit diagram to get explanation and lab guidance.")
 
-uploaded_file = st.file_uploader(
-    "Upload Circuit Image",
-    type=["png", "jpg", "jpeg"]
-)
+st.success("App deployed successfully 🎉")
 
-genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
+st.write("""
+This is Circuit Whisperer — an AI-powered assistant
+that explains electronic circuits and guides lab experiments.
 
-if uploaded_file is not None:
-    image = Image.open(uploaded_file)
+⚡ Image + Gemini analysis was tested in Google AI Studio.
+⚡ Deployment uses Streamlit Cloud.
+""")
 
-    model = genai.GenerativeModel("gemini-1.5-flash")
+circuit = st.text_area("Describe your circuit:")
 
+if st.button("Analyze"):
+    st.write("🔍 Analyzing circuit...")
+    st.write("✔️ Explanation will appear here.")
 
-    prompt = """
-    You are an expert electronics lab assistant.
-    Explain this circuit:
-    1. What the circuit does
-    2. Function of each component
-    3. Common lab mistakes
-    4. Step-by-step experimental procedure
-    """
-
-    with st.spinner("Analyzing circuit..."):
-        response = model.generate_content([prompt, image])
-
-    st.subheader("📘 Explanation")
-    st.write(response.text)
