@@ -14,7 +14,8 @@ that explains electronic circuits and guides lab experiments.
 ⚡ Deployment uses Streamlit Cloud.
 """)
 
-circuit = st.text_area("Describe your circuit:")
+st.file_uploader("Upload circuit image (demo)", type=["png","jpg","jpeg"])
+circuit = st.text_area("Or describe your circuit:")
 
 if st.button("Analyze"):
     st.write("🔍 Analyzing circuit...")
