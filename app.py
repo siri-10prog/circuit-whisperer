@@ -18,7 +18,8 @@ genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 if uploaded_file is not None:
     image = Image.open(uploaded_file)
 
-    model = genai.GenerativeModel("models/gemini-1.5-flash")
+    model = genai.GenerativeModel("gemini-1.5-flash")
+
 
     prompt = """
     You are an expert electronics lab assistant.
